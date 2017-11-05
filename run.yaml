@@ -1,0 +1,23 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: catullusbot
+spec:
+  selector:
+    matchLabels:
+      app: catullusbot
+  template:
+    metadata:
+      labels:
+        app: catullusbot
+    spec:
+      containers:
+      - image: eu.gcr.io/telegram-bots-179510/catullusbot
+        name: catullusbot
+        env:
+        - name: CATULLUS_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: telegram-catullus
+              key: token
+
